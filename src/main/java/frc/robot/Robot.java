@@ -16,6 +16,7 @@ public class Robot extends TimedRobot {
     SmartDashboard.putNumber("kD", 0);
     SmartDashboard.putNumber("maxI", 0);
     SmartDashboard.putNumber("Izone", 0);
+    SmartDashboard.putNumber("Sequence", 1);
     drive = new Drive(IO.left, IO.right, IO.navX);
     auto = new Auto();
   }
@@ -26,17 +27,20 @@ public class Robot extends TimedRobot {
 
   @Override
   public void autonomousInit() {
-    auto.init();
+    //auto.init();
   }
 
   @Override
   public void autonomousPeriodic() {
     if (once) {
+      auto.selection((int)SmartDashboard.getNumber("Sequence", 1));
+      auto.init();
       auto.execute();
       once = false;
     } else if (!auto.done()) {
       auto.execute();
     }
+    SmartDashboard.putBoolean("Auto Done?", auto.done());
   }
 
   @Override

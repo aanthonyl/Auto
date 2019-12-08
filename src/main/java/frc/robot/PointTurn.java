@@ -118,7 +118,7 @@ public class PointTurn implements ICommand {
 
 	@Override
 	public boolean done() {
-		if (error == 0 && 
+		if (error < 10 && error > -10 && 
 				Math.abs(IO.left.getSelectedSensorVelocity(0)) < velocityDeadband &&
 				Math.abs(IO.right.getSelectedSensorVelocity(0)) < velocityDeadband) {
 			return true;
